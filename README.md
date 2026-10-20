@@ -39,42 +39,15 @@ git clone https://github.com/draconik514/AR-Face-Tracking.git
 cd AR-Face-Tracking
 ```
 
-### 2. Setup Supabase
-
-1. Buat akun di [supabase.com](https://supabase.com)
-2. Buat project baru
-3. Buka **SQL Editor** dan jalankan query berikut:
-
-```sql
-create table ar_sessions (
-  id bigint generated always as identity primary key,
-  user_id uuid references auth.users(id),
-  mask_name text not null,
-  created_at timestamptz default now()
-);
-
-alter table ar_sessions enable row level security;
-create policy "allow insert" on ar_sessions for insert with check (true);
-create policy "allow select" on ar_sessions for select using (true);
-```
-
-4. Buka **Settings → API**, copy **Project URL** dan **anon public key**
-5. Buka file `lib/main.dart` dan isi credentials:
-
-```dart
-await Supabase.initialize(
-  url: 'https://YOUR_PROJECT_ID.supabase.co',  // ganti ini
-  anonKey: 'YOUR_ANON_KEY',                     // ganti ini
-);
-```
-
-### 3. Install Dependencies
+### 2. Install Dependencies
 
 ```bash
 flutter pub get
 ```
 
-### 4. Jalankan Aplikasi
+> ✅ **Database Supabase sudah terkonfigurasi** — tidak perlu setup Supabase baru. Credentials sudah tersedia di `lib/main.dart`.
+
+### 3. Jalankan Aplikasi
 
 Sambungkan HP Android via USB dengan USB Debugging aktif, lalu:
 
